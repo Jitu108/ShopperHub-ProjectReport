@@ -1,0 +1,106 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Ordering.API.ProtoService";
+
+service GrpcOrderProvider {
+	rpc GrpcAddOrder(GrpcOrderCreate) returns (GrpcOrderBool);
+	rpc GrpcGetOrdersByUserId(GrpcOrderByUserIdRequest) returns (GrpcOrdersDto);
+	rpc GrpcGetOrderById(GrpcOrderByIdRequest) returns (GrpcOrderDto);
+	rpc GrpcCancelOrder(GrpcCancelOrderDto) returns (GrpcOrderStatusInfo);
+	rpc GrpcRefundOrder(GrpcOrderByIdRequest) returns (GrpcOrderStatusInfo);
+	rpc GetCancelledOrders(GrpcOrderByUserIdRequest) returns (GrpcCancelledOrdersDto);
+	rpc GetRefundedOrders(GrpcOrderByUserIdRequest) returns (GrpcRefundedOrdersDto);
+	 
+}
+
+message GrpcOrderByUserIdRequest {
+	int32 userId = 1;
+}
+
+message GrpcOrderByIdRequest {
+	int32 id = 1;
+}
+
+message GrpcOrderBool {
+	bool response = 1;
+}
+
+message GrpcOrderCreate {
+	int32 userId = 1;
+	repeated GrpcOrderItemCreate items = 2;
+	GrpcAddressDto deliveryAddress = 3;
+	google.protobuf.DoubleValue totalPrice = 4;
+	google.protobuf.StringValue paymentMode = 5;
+}
+
+message GrpcOrderItemCreate {
+	int64 productId = 1;
+	google.protobuf.StringValue productName = 2;
+	google.protobuf.DoubleValue unitPrice = 3;
+	int32 quantity = 4;
+}
+
+message GrpcAddressDto{
+	int32 id = 1;
+    google.protobuf.StringValue firstName  = 2;
+	google.protobuf.StringValue lastName = 3;
+	google.protobuf.StringValue addressLine1 = 4;
+    google.protobuf.StringValue addressLine2 = 5;
+	google.protobuf.StringValue city = 6;
+	google.protobuf.StringValue state = 7;
+    google.protobuf.StringValue pin = 8;
+}
+
+message GrpcOrderDto{
+	int32 id = 1;
+    int32 userId = 2;
+    repeated GrpcOrderItemDto items = 3;
+    google.protobuf.DoubleValue totalPrice = 4;
+    google.protobuf.Timestamp orderDate = 5;
+    GrpcAddressDto deliveryAddress = 6;
+    google.protobuf.StringValue paymentMode = 7;
+    google.protobuf.StringValue orderStatus = 8;
+}
+
+message GrpcOrdersDto{
+	repeated GrpcOrderDto orders = 1;
+}
+
+message GrpcOrderItemDto {
+	int32 id = 1;
+    int64 productId = 2;
+	google.protobuf.StringValue productName = 3;
+	google.protobuf.DoubleValue unitPrice = 4;
+	int32 quantity = 5;
+}
+
+message GrpcCancelOrderDto{
+    int32 orderId = 1;
+    google.protobuf.StringValue cancellationReason = 2;
+}
+
+message GrpcOrderStatusInfo{
+	google.protobuf.StringValue orderStatus = 1;
+}
+
+message GrpcRefundedOrderDto {
+    int32 orderId = 1;
+    google.protobuf.Timestamp refundDate = 2;
+    google.protobuf.DoubleValue refundedAmount = 3;
+}
+
+message GrpcRefundedOrdersDto {
+	repeated GrpcRefundedOrderDto orders = 1;
+}
+
+message GrpcCancelledOrderDto{
+	int32 orderId = 1;
+    google.protobuf.Timestamp CancellationDate = 2;
+    google.protobuf.StringValue CancellationReason = 3;
+}
+
+message GrpcCancelledOrdersDto{
+	repeated GrpcCancelledOrderDto orders = 1;
+}

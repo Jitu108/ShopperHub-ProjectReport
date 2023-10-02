@@ -1,0 +1,9 @@
+<div class="container mt-3">
+    <app-basket [basketInfo]="basketInfo" (onBasketClear)="onBasketClearClick()"></app-basket>
+    <div class="row">
+        <div class="col-sm-3" *ngFor="let product of products">
+            <catalog-item [id]="product.id" [product]="product" (onCountDecrease)="onCountDecreaseClick($event)"
+                (onCountIncrease)="onCountIncreaseClick($event)"></catalog-item>
+        </div>
+    </div>
+</div>

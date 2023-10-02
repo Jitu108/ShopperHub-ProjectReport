@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "DiscountAPI.Protos";
+
+service GrpcDiscount {
+	rpc GetDiscountProducts(DiscountRequest) returns (DiscountProductResponse);
+	rpc GetDetailedDiscountProducts(DiscountRequest) returns(DetailedDiscountProductResponse);
+}
+
+message DiscountRequest{}
+
+message GrpcDiscountProduct {
+	int64 productId = 1;
+	google.protobuf.StringValue name = 2;
+	float mrp = 3;
+	float price = 4;
+}
+
+message GrpcDetailedDiscountProduct {
+	int32 discountId = 1;
+	int64 productId = 2;
+	google.protobuf.StringValue name = 3;
+	google.protobuf.FloatValue discountFlat = 4;
+	google.protobuf.FloatValue discountPercent = 5;
+	bool isDiscountPercent = 6;
+	float mrp = 7;
+}
+
+message DetailedDiscountProductResponse {
+	repeated GrpcDetailedDiscountProduct products = 1;
+}
+
+message DiscountProductResponse{
+	repeated GrpcDiscountProduct products = 1;
+}

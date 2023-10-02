@@ -1,0 +1,70 @@
+.image {
+    //opacity: 0.8;
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    height: 120px;
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+    transition: opacity 0.5s, -webkit-transform 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s, -webkit-transform 0.5s;
+    pointer-events: none;
+    user-select: none;
+}
+
+.card {
+    height: 420px;
+    padding-bottom: 10px;
+}
+
+.card-title {
+    height: 40px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #3E6D72;
+}
+
+.card-text {
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.price-div {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.mrp {
+    text-decoration: line-through;
+}
+
+.count {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    pointer-events: none;
+    user-select: none;
+}
+
+.count-button {
+    width: 36px;
+    font-weight: bold;
+}
+
+.count-button {
+    cursor: hand !important;
+}
+
+.count-button:disabled {
+    cursor: not-allowed;
+}

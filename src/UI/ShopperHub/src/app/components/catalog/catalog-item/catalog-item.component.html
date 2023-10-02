@@ -1,0 +1,19 @@
+<div class="card mb-3">
+    <div class="card-body" [id]="id">
+        <div><img style="background-color: white;" alt="Product Image" [src]="product.imageData" class="image"></div>
+        <div class="card-title">{{ product.name }}</div>
+        <div class="card-text">{{ product.description }}</div>
+        <p><span class="price">&#8377; {{product.price}}</span> &nbsp;&nbsp; <span *ngIf="product.mrp != product.price"
+                style="color: red;">({{discountStr}}%
+                Off)</span></p>
+        <p *ngIf="product.mrp != product.price">MRP: <span class="mrp">&#8377;
+                {{product.mrp}}</span></p>
+        <div class="price-div">
+            <button class="btn btn-danger ml-1 count-button" [disabled]="product.count == 0"
+                (click)="onCountDecreaseClick(product.id)">-</button>
+            <label class="count">{{product.count}}</label>
+            <button class="btn btn-primary count-button" [disabled]="product.count == product.availableStock"
+                (click)="onCountIncreaseClick(product.id)">+</button>
+        </div>
+    </div>
+</div>

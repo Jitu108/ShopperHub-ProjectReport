@@ -1,0 +1,59 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Identity.API.ProtoService";
+
+service GrpcIdentityProvider {
+	rpc GrpcAuthenticate(GrpcIdentityAuthenticateRequest) returns (GrpcIdentityAuthenticateResponse);
+	rpc GrpcGetUserById(GrpcUserIdRequest) returns (GrpcIdentityUser);
+	rpc GrpcGetUserByEmail(GrpcUserEmailRequest) returns (GrpcIdentityUser);
+	rpc GrpcAddUser(GrpcAddUserRequest) returns (GrpcIdentityBool);
+}
+
+message GrpcUserIdRequest {
+	int32 id = 1;
+}
+
+message GrpcIdentityBool {
+	bool response = 1;
+}
+
+message GrpcUserEmailRequest {
+	google.protobuf.StringValue email = 1;
+}
+
+message GrpcIdentityAuthenticateRequest{
+	google.protobuf.StringValue email = 1;
+	google.protobuf.StringValue password = 2;
+}
+
+message GrpcAddUserRequest {
+	google.protobuf.StringValue firstName = 1;
+	google.protobuf.StringValue lastName = 2;
+	google.protobuf.StringValue email = 3;
+	google.protobuf.StringValue password = 4;
+
+}
+
+message GrpcIdentityAuthenticateResponse{
+	int32 id = 1;
+	google.protobuf.StringValue firstName = 2;
+	google.protobuf.StringValue lastName = 3;
+	google.protobuf.StringValue email = 4;
+	int32 roleId = 5;
+	google.protobuf.StringValue role = 6;
+	google.protobuf.StringValue fullName = 7;
+	google.protobuf.StringValue token = 8;
+	google.protobuf.Timestamp expiryDate = 9;
+}
+
+message GrpcIdentityUser {
+	int32 id = 1;
+	google.protobuf.StringValue firstName = 2;
+	google.protobuf.StringValue lastName = 3;
+	google.protobuf.StringValue email = 4;
+	int32 roleId = 5;
+	google.protobuf.StringValue role = 6;
+	google.protobuf.StringValue fullName = 7;
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Basket.API.ProtoService";
+
+service GrpcBasketProvider {
+	rpc GrpcGetBasket(GrpcGetBasketRequest) returns(GrpcShoppingCart);
+	rpc GrpcUpdateBasket(GrpcShoppingCart) returns (GrpcBasketBool);
+	rpc GrpcDeleteBasket(GrpcDeleteBasketRequest) returns(GrpcBasketBool);
+}
+
+message GrpcBasketBool {
+	bool response = 1;
+}
+
+message GrpcGetBasketRequest {
+	int32 userId = 1;
+}
+
+message GrpcDeleteBasketRequest {
+	int32 userId = 1;
+}
+
+message GrpcShoppingCartItem{
+	int32 id = 1;
+	int32 productId = 2;
+	google.protobuf.StringValue productName = 3;
+	google.protobuf.DoubleValue unitPrice = 4;
+	int32 quantity = 5;
+}
+
+message GrpcShoppingCart {
+	int32 userId = 1;
+	repeated GrpcShoppingCartItem items = 2;
+	google.protobuf.DoubleValue totalPrice = 3;
+}

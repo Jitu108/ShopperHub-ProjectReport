@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Catalog.API.ProtoService";
+
+service GrpcCatalogProductProvider {
+	rpc GrpcGetAllProductsLean(GrpcEmptyRequest) returns (GrpcCatalogProductList);
+}
+
+message GrpcEmptyRequest{}
+
+message GrpcCatalogProduct {
+	int32 productId = 1;
+	google.protobuf.StringValue name = 2;
+	float mrp = 3;
+	float price = 4;
+}
+
+message GrpcCatalogProductList{
+	repeated GrpcCatalogProduct products = 1;
+}

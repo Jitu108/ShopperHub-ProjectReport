@@ -1,0 +1,17 @@
+<div class="basket-bar">
+    <label class="cart-count-container">
+        <span class="cart-icon"><mat-icon>shopping_cart</mat-icon></span>
+        <span class="badge bg-danger cart-count">{{basketInfo.itemCount}}</span>
+    </label>
+    <label class="label-sep text-secondary">|</label>
+    <label class="label-total text-dark">&#8377;{{basketInfo.totalAmount}}</label>
+    <label class="label-sep text-secondary">|</label>
+    <button class="btn btn-success cart-checkout" (click)="checkout()" [disabled]="basketInfo.itemCount==0">Checkout
+        <span class="checkout-icon"><mat-icon>shopping_cart_checkout</mat-icon></span>
+    </button>
+    <label class="label-sep text-secondary">|</label>
+    <label><span class="cart-icon">
+            <mat-icon (click)="onBasketClearClick()" class="text-danger"
+                matTooltip="Clear Cart">remove_shopping_cart</mat-icon>
+        </span></label>
+</div>

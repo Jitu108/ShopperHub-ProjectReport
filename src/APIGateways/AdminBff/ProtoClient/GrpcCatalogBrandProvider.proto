@@ -1,0 +1,42 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Catalog.API.ProtoService";
+
+service GrpcCatalogBrandProvider {
+	rpc GrpcAddCatalogBrand(GrpcCatalogBrandToCreate) returns(GrpcBrandBool);
+	rpc GrpcUpdateCatalogBrand(GrpcCatalogBrandToUpdate) returns(GrpcBrandBool);
+	rpc GrpcDeleteCatalogBrand(GrpcBrandIdRequest) returns(GrpcBrandBool);
+	rpc GrpcGetCatalogBrandById(GrpcBrandIdRequest) returns(GrpcCatalogBrand);
+	rpc GrpcGetCatalogBrands(GrpcBrandEmptyRequest) returns(GrpcCatalogBrandList);
+}
+
+message GrpcBrandEmptyRequest{}
+message GrpcBrandIdRequest {
+	int64 id = 1;
+}
+
+message GrpcBrandBool {
+	bool response = 1;
+}
+
+
+message GrpcCatalogBrandToCreate {
+	google.protobuf.StringValue brand = 1;
+}
+
+message GrpcCatalogBrandToUpdate {
+	int64 id = 1;
+	google.protobuf.StringValue brand = 2;
+}
+
+message GrpcCatalogBrand {
+	int64 id = 1;
+	google.protobuf.StringValue brand = 2;
+}
+
+message GrpcCatalogBrandList {
+	repeated GrpcCatalogBrand brands = 1;
+}
+
+

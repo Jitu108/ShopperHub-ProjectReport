@@ -1,0 +1,24 @@
+.card {
+    height: 250px;
+    padding-bottom: 10px;
+}
+
+.card-title {
+    height: 40px;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #3E6D72;
+}
+
+.card-text {
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ok-div {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

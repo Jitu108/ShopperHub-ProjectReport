@@ -1,0 +1,82 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+option csharp_namespace = "Catalog.API.ProtoService";
+
+service GrpcCatalogProductProvider {
+	rpc GrpcGetAllProducts(GrpcProductEmptyRequest) returns (GrpcCatalogProductDetailedList);
+	rpc GrpcGetProductByBrandId(GrpcProductIdRequest) returns (GrpcCatalogProductDetailedList);
+	rpc GrpcGetProductByCatalogTypeId(GrpcProductIdRequest) returns (GrpcCatalogProductDetailedList);
+	rpc GrpcGetProductById(GrpcProductIdRequest) returns (GrpcCatalogProductDetailed);
+	rpc GrpcAddProduct(GrpcCatalogProductToCreate) returns(GrpcProductBool);
+	rpc GrpcUpdateProduct(GrpcCatalogProductToUpdate) returns(GrpcProductBool);
+	rpc GrpcDeleteProduct(GrpcProductIdRequest) returns(GrpcProductBool);
+}
+
+message GrpcProductEmptyRequest{}
+message GrpcProductIdRequest {
+	int64 id = 1;
+}
+
+message GrpcProductBool {
+	bool response = 1;
+}
+
+message GrpcCatalogProductDetailed {
+	int64 id = 1;
+	google.protobuf.StringValue name = 2;
+	google.protobuf.StringValue description = 3;
+	google.protobuf.DoubleValue price = 4;
+	double mrp = 5;
+	int64 catalogTypeId = 6;
+	google.protobuf.StringValue CatalogType = 7;
+
+	int64 CatalogBrandId = 8;
+	google.protobuf.StringValue CatalogBrand = 9;
+	int32 AvailableStock = 10;
+	int32 RestockThreshold = 11;
+	int32 MaxStockThreshold = 12;
+	int32 ImageId = 13;
+	google.protobuf.StringValue ImageName = 14;
+	google.protobuf.StringValue ImageCaption = 15;
+	google.protobuf.StringValue ImageData = 16;
+}
+
+message GrpcCatalogProductDetailedList {
+	repeated GrpcCatalogProductDetailed products = 1;
+}
+
+message GrpcCatalogProductToCreate {
+	int64 id = 1;
+	google.protobuf.StringValue name = 2;
+	google.protobuf.StringValue description = 3;
+	google.protobuf.DoubleValue price = 4;
+	double mrp = 5;
+	int64 catalogTypeId = 6;
+
+	int64 CatalogBrandId = 7;
+	int32 AvailableStock = 8;
+	int32 RestockThreshold = 9;
+	int32 MaxStockThreshold = 10;
+	int32 ImageId = 11;
+	google.protobuf.StringValue ImageName = 12;
+	google.protobuf.StringValue ImageCaption = 13;
+	google.protobuf.StringValue ImageData = 14;
+}
+
+message GrpcCatalogProductToUpdate {
+	int64 id = 1;
+	google.protobuf.StringValue name = 2;
+	google.protobuf.StringValue description = 3;
+	google.protobuf.DoubleValue price = 4;
+	double mrp = 5;
+	int64 catalogTypeId = 6;
+
+	int64 CatalogBrandId = 7;
+	int32 AvailableStock = 8;
+	int32 RestockThreshold = 9;
+	int32 MaxStockThreshold = 10;
+	int32 ImageId = 11;
+	google.protobuf.StringValue ImageName = 12;
+	google.protobuf.StringValue ImageCaption = 13;
+	google.protobuf.StringValue ImageData = 14;
+}

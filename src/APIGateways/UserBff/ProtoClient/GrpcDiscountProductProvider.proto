@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "DiscountAPI.ProtoService";
+
+service GrpcDiscountProductProvider {
+	rpc GrpcUpdateProductDiscount(GrpcDiscountUpdate) returns (GrpcDiscountBool);
+	rpc GrpcGetProductDiscounts(GrpcDiscountEmptyRequest) returns (GrpcProductDiscountList);
+}
+
+message GrpcDiscountEmptyRequest{}
+message GrpcDiscountBool {
+	bool response = 1;
+}
+
+message GrpcDiscountUpdate {
+	int64 productId = 1;
+	google.protobuf.DoubleValue discount = 2;
+	bool isPercent = 3;
+}
+
+message GrpcProductDiscount {
+	int64 productId = 1;
+	google.protobuf.StringValue name = 2;
+	google.protobuf.DoubleValue discountFlat = 3;
+	google.protobuf.DoubleValue discountPercent = 4;
+	bool isDiscountPercent = 5;
+	google.protobuf.DoubleValue mrp = 6;
+	google.protobuf.DoubleValue price = 7;
+}
+
+message GrpcProductDiscountList {
+	repeated GrpcProductDiscount productDiscounts = 1;
+}

@@ -1,0 +1,81 @@
+<div class="row vw-100 mt-1">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div>
+            <div class="col-md-12 header-div"><span class="material-icons back-icon"
+                    (click)="onBackClick()">arrow_back</span>&nbsp;&nbsp;
+                <span class="header">Address Info</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <form id="addressForm" #addressForm="ngForm" (ngSubmit)="onSaveAddressClick(addressForm)">
+                    <mat-card>
+                        <div class="m-3">
+                            <div *ngIf="error.hasError" class="alert alert-danger">{{error.message}}</div>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>First Name</mat-label>
+                                <input type="text" name="firstName" matInput placeholder="firstName"
+                                    [(ngModel)]="address.firstName" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>Last Name</mat-label>
+                                <input type="text" name="lastName" matInput placeholder="lastName"
+                                    [(ngModel)]="address.lastName" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>Address Line 1</mat-label>
+                                <input type="text" name="addressLine1" matInput placeholder="addressLine1"
+                                    [(ngModel)]="address.addressLine1" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>Address Line 2</mat-label>
+                                <input type="text" name="addressLine2" matInput placeholder="addressLine2"
+                                    [(ngModel)]="address.addressLine2" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>City</mat-label>
+                                <input type="text" name="city" matInput placeholder="city" [(ngModel)]="address.city"
+                                    required>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>State</mat-label>
+                                <input type="text" name="state" matInput placeholder="state" [(ngModel)]="address.state"
+                                    required>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>PIN</mat-label>
+                                <input type="text" name="pin" matInput placeholder="pin" [(ngModel)]="address.pin"
+                                    required>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100">
+                                <mat-label>Payment Mode</mat-label>
+                                <input type="text" readonly name="cardType" matInput placeholder="cardType"
+                                    [(ngModel)]="cardType" required>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" mat-raised-button class="btn btn-primary btn-submit">Save</button>
+                                <button type="button" mat-raised-button class="btn btn-secondary"
+                                    (click)="onCancelClick()">Cancel</button>
+
+                            </div>
+                        </div>
+                    </mat-card>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>

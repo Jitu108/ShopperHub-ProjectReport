@@ -1,0 +1,42 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Catalog.API.ProtoService";
+
+service GrpcCatalogTypeProvider {
+	rpc GrpcAddCatalogType(GrpcCatalogTypeToCreate) returns(GrpcTypeBool);
+	rpc GrpcUpdateCatalogType(GrpcCatalogTypeToUpdate) returns(GrpcTypeBool);
+	rpc GrpcDeleteCatalogType(GrpcTypeIdRequest) returns(GrpcTypeBool);
+	rpc GrpcGetCatalogTypeById(GrpcTypeIdRequest) returns(GrpcCatalogType);
+	rpc GrpcGetCatalogTypes(GrpcTypeEmptyRequest) returns(GrpcCatalogTypeList);
+}
+
+message GrpcTypeEmptyRequest{}
+message GrpcTypeIdRequest {
+	int64 id = 1;
+}
+
+message GrpcTypeBool {
+	bool response = 1;
+}
+
+
+message GrpcCatalogTypeToCreate {
+	google.protobuf.StringValue type = 1;
+}
+
+message GrpcCatalogTypeToUpdate {
+	int64 id = 1;
+	google.protobuf.StringValue type = 2;
+}
+
+message GrpcCatalogType {
+	int64 id = 1;
+	google.protobuf.StringValue type = 2;
+}
+
+message GrpcCatalogTypeList {
+	repeated GrpcCatalogType types = 1;
+}
+
+
