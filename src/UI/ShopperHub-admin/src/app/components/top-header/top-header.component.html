@@ -1,0 +1,40 @@
+<header>
+    <nav class="navbar navbar-expand-sm sm-primary">
+        <div matRipple><a class="navbar-brand" routerLink="/">ShopperHub-Admin</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li *ngIf="!authUser" matRipple class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/login">Login</a>
+                </li>
+
+                <li *ngIf="authUser" matRipple class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/brands">Brand</a>
+                </li>
+                <li *ngIf="authUser" matRipple class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/types">Type</a>
+                </li>
+                <li *ngIf="authUser" matRipple class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/products">Product</a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="authUser" ngbDropdown class="nav-item dropdown">
+                    <a ngbDropdownToggle class="dropdown-toggle nav-link" id="userdropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ authUser.firstName }} {{ authUser.lastName }} <span class="caret"></span>
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="userdropdown">
+                        <!-- <li><a class="dropdown-item" routerLink="/profile">Profile</a></li> -->
+                        <li><a (click)="logout()" class="dropdown-item" routerLink="/">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

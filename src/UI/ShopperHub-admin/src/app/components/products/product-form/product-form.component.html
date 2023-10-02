@@ -1,0 +1,159 @@
+<div class="d-flex justify-content-center vw-100 mt-5">
+    <div class="w-50">
+        <form id="productForm" #productForm="ngForm" (ngSubmit)="onProductSubmit(productForm)" autocomplete="off">
+            <mat-card>
+                <legend class="scheduler-border mb-3">{{ mode }} Product</legend>
+                <mat-accordion multi="true">
+
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Type</mat-label>
+                            <mat-select [(value)]="selectedTypeId" (selectionChange)="onTypeSelectionChange($event)">
+                                <mat-option *ngFor="let item of type$|async" [value]="item.id">
+                                    {{item.type}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Brand</mat-label>
+                            <mat-select [(value)]="selectedBrandId" (selectionChange)="onBrandSelectionChange($event)">
+                                <mat-option *ngFor="let item of brand$|async" [value]="item.id">
+                                    {{item.brand}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput #name="ngModel" name="name" required
+                                [ngModel]="(productDetail$ | async)?.name" placeholder="Name"
+                                (change)="onNameChange($event)">
+                            <mat-error *ngIf="!(name.valid || (name.pristine && !productForm.submitted))">
+                                Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <input type="text" matInput #description="ngModel" name="description" required
+                                [ngModel]="(productDetail$ | async)?.description" placeholder="Description"
+                                (change)="onDescChange($event)">
+                            <mat-error *ngIf="!(description.valid || (description.pristine && !productForm.submitted))">
+                                Description is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Max. Retail Price</mat-label>
+                            <input type="number" matInput #mrp="ngModel" name="mrp" required
+                                [ngModel]="(productDetail$ | async)?.mrp" placeholder="Max. Retail Price"
+                                (change)="onMRPChange($event)">
+                            <mat-error *ngIf="!(mrp.valid || (mrp.pristine && !productForm.submitted))">
+                                Max. Retail Price is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Unit Price</mat-label>
+                            <input type="number" matInput #price="ngModel" name="price"
+                                [ngModel]="(productDetail$ | async)?.price" placeholder="Unit Price"
+                                (change)="onPriceChange($event)">
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Available Stock</mat-label>
+                            <input type="number" matInput #availableStock="ngModel" name="availableStock" required
+                                [ngModel]="(productDetail$ | async)?.availableStock" placeholder="Available Stock"
+                                (change)="onAvailableChange($event)">
+                            <mat-error
+                                *ngIf="!(availableStock.valid || (availableStock.pristine && !productForm.submitted))">
+                                Available Stock is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Restock Threshold</mat-label>
+                            <input type="number" matInput #restockThreshold="ngModel" name="restockThreshold" required
+                                [ngModel]="(productDetail$ | async)?.restockThreshold" placeholder="Restock Threshold"
+                                (change)="onRestockThresholdChange($event)">
+                            <mat-error
+                                *ngIf="!(restockThreshold.valid || (restockThreshold.pristine && !productForm.submitted))">
+                                Restock Threshold is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Max Stock Threshold</mat-label>
+                            <input type="number" matInput #maxStockThreshold="ngModel" name="maxStockThreshold" required
+                                [ngModel]="(productDetail$ | async)?.maxStockThreshold"
+                                placeholder="Max Stock Threshold" (change)="onMaxThresholdChange($event)">
+                            <mat-error
+                                *ngIf="!(maxStockThreshold.valid || (maxStockThreshold.pristine && !productForm.submitted))">
+                                Max Stock Threshold is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- <div>
+                        <mat-checkbox [checked]="(productDetail$ | async)?.onReorder" color="primary"
+                            (change)="onReorder($event.checked)">
+                            On Reorder
+                        </mat-checkbox>
+
+                        <mat-slide-toggle color="primary" [checked]="(productDetail$ | async)?.onReorder"
+                            (change)="onReorder($event.checked)">
+                            On Reorder
+                        </mat-slide-toggle>
+                    </div> -->
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Image Caption</mat-label>
+                            <input type="text" matInput #imageCaption="ngModel" name="imageCaption"
+                                [ngModel]="(productDetail$ | async)?.imageCaption" placeholder="Image Caption"
+                                (change)="onImageCaptionChange($event)">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="image-div">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" (change)="onFileSelected($event)">
+                            <label class="custom-file-label">{{imageLabel}}</label>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <mat-form-field>
+                            <mat-label>Image Data</mat-label>
+                            <input type="file" (change)="onFileSelected($event)">
+                        </mat-form-field>
+                    </div> -->
+
+                </mat-accordion>
+
+                <div class="row mt-5">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" mat-raised-button class="btn-primary mr-2">Save</button>
+                        <button type="button" mat-raised-button class="btn-basic"
+                            (click)="onCancelClick()">Cancel</button>
+                    </div>
+
+                </div>
+            </mat-card>
+        </form>
+    </div>
+</div>

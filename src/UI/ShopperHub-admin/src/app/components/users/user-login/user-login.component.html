@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-center vw-100 mt-5">
+    <div class="w-50">
+        <form id="loginForm" #loginForm="ngForm" (ngSubmit)="onLoginClick(loginForm)">
+            <mat-card>
+                <legend class="scheduler-border">Login</legend>
+                <div class="m-3">
+                    <div *ngIf="error.hasError" class="alert alert-danger">{{error.message}}</div>
+                    <mat-form-field class="w-100">
+                        <mat-label>Username</mat-label>
+
+                        <input type="text" name="Email" matInput placeholder="Username" [(ngModel)]="Email" required>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100">
+                        <mat-label>Password</mat-label>
+
+                        <input type="password" name="Password" matInput placeholder="Password" [(ngModel)]="Password"
+                            required>
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" mat-raised-button class="btn-primary mr-2">Login</button>
+                        <button type="button" mat-raised-button class="btn-basic"
+                            (click)="onCancelClick()">Cancel</button>
+
+                    </div>
+                </div>
+            </mat-card>
+        </form>
+    </div>
+</div>
